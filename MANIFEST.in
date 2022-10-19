@@ -28,3 +28,5 @@ include rdm_binderhub_jlabextension/nbextension/*
 
 recursive-include rdm_binderhub_jlabextension/locale *.json
 recursive-include rdm_binderhub_jlabextension/locale *.mo
+recursive-include rdm_binderhub_jlabextension/locale *.po
+recursive-include rdm_binderhub_jlabextension/locale *.pot
