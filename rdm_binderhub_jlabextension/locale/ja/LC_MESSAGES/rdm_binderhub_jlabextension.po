@@ -16,7 +16,7 @@ msgstr ""
 
 #: src/index.ts:135 src/index.ts:162 src/index.ts:163 src/index.ts:166
 msgid "Sync to RDM"
-msgstr "Sync to RDM"
+msgstr "RDMと同期"
 
 #: src/messages.tsx:5
 msgid "Not running in a GakuNin RDM linked environment"
