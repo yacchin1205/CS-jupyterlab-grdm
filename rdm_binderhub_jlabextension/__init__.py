@@ -10,6 +10,18 @@ except ImportError:
 from .handlers import setup_handlers
 
 
+# nbextension
+def _jupyter_nbextension_paths():
+    return [dict(section="tree",
+                 src="nbextension",
+                 dest="rdm_binderhub_jlabextension",
+                 require="rdm_binderhub_jlabextension/main"),
+            dict(section="notebook",
+                 src="nbextension",
+                 dest="rdm_binderhub_jlabextension",
+                 require="rdm_binderhub_jlabextension/main")]
+
+
 def _jupyter_labextension_paths():
     return [{
         "src": "labextension",
