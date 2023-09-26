@@ -2,12 +2,10 @@ import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
-import {
-  IDefaultFileBrowser
-} from '@jupyterlab/filebrowser';
+import { IDefaultFileBrowser } from '@jupyterlab/filebrowser';
 import { ITranslator } from '@jupyterlab/translation';
 
-import { createSyncButton } from './button'; 
+import { createSyncButton } from './button';
 
 /**
  * Initialization data for the rdm-binderhub-jlabextension extension.
@@ -20,9 +18,11 @@ const plugin: JupyterFrontEndPlugin<void> = {
   activate: (
     app: JupyterFrontEnd,
     browser: IDefaultFileBrowser,
-    translator: ITranslator,
+    translator: ITranslator
   ) => {
-    console.log('JupyterLab extension rdm-binderhub-jlabextension is activated!');
+    console.log(
+      'JupyterLab extension rdm-binderhub-jlabextension is activated!'
+    );
     const trans = translator.load('jupyterlab');
     const sync = createSyncButton(trans);
     browser.toolbar.addItem('sync_to_grdm', sync);
