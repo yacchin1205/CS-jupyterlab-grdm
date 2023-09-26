@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "jlpm build:lib && jlpm build:labextension:dev",
-    "build:labextension": "jupyter labextension build .",
+    "build:labextension": "jupyter labextension build --debug .",
     "build:labextension:dev": "jupyter labextension build --development True .",
     "build:lib": "tsc --sourceMap && mkdir -p lib/images && cp src/images/*.svg lib/images/ && cp src/images/*.svg rdm_binderhub_jlabextension/nbextension/",
     "build:lib:prod": "tsc && mkdir -p lib/images && cp src/images/*.svg lib/images/ && cp src/images/*.svg rdm_binderhub_jlabextension/nbextension/",
@@ -61,7 +61,8 @@
     "@jupyterlab/filebrowser": "^4.0.6",
     "@jupyterlab/services": "^7.0.6",
     "@jupyterlab/translation": "^4.0.6",
-    "@jupyterlab/ui-components": "^4.0.6"
+    "@jupyterlab/ui-components": "^4.0.6",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@jupyterlab/builder": "^4.0.0",
