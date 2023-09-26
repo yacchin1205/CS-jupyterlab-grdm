@@ -120,4 +120,7 @@ dmypy.json
 # Yarn cache
 .yarn/
 
+# SVG
+rdm_binderhub_jlabextension/nbextension/*.svg
+
 _temp_extension
