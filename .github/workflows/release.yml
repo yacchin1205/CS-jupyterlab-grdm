@@ -53,6 +53,14 @@ jobs:
         # Prepare .mo file
         jupyterlab-translate compile . rdm_binderhub_jlabextension -l ja_JP
 
+        # List the installed modules
+        #npm i
+        #npm list -a
+
+        jlpm install
+        jlpm run build:lib:prod
+        jlpm run build:labextension
+
         python -m pip install .
 
         jupyter server extension list 2>&1 | grep -ie "rdm_binderhub_jlabextension.*OK"
