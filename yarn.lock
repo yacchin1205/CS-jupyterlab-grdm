@@ -4156,7 +4156,6 @@ __metadata:
     "@jupyterlab/builder": ^4.0.0
     "@jupyterlab/coreutils": ^6.0.6
     "@jupyterlab/filebrowser": ^4.0.6
-    "@jupyterlab/services": ^7.0.6
     "@jupyterlab/translation": ^4.0.6
     "@jupyterlab/ui-components": ^4.0.6
     "@types/json-schema": ^7.0.11
@@ -4172,6 +4171,7 @@ __metadata:
     mkdirp: ^1.0.3
     npm-run-all: ^4.1.5
     prettier: ^3.0.0
+    react: ^18.2.0
     rimraf: ^5.0.1
     source-map-loader: ^1.0.2
     style-loader: ^3.3.1
