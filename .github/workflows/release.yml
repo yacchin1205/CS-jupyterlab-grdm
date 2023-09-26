@@ -76,7 +76,7 @@ jobs:
       - name: TEST
         run: |
           set -eux
-          ls -la
+          ls -la .jupyter_releaser_checkout/dist
 
       - name: Upload Distributions
         uses: actions/upload-artifact@v3
