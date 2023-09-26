@@ -48,7 +48,7 @@ function formatWarnMessage(action: IFilesAction) {
 }
 
 async function reloadButtonState(button: ToolbarButton) {
-  const resp = await requestAPI<FilesResponse>('files');
+  const resp = await requestAPI<IFilesResponse>('files');
   if (!resp.syncing && resp.last_result && resp.last_result.exit_code !== 0) {
     console.error('Sync error', resp.last_result);
     const message = 'Command failed';
