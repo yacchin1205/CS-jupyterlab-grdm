@@ -26,6 +26,9 @@ dependencies = [
 ]
 dynamic = ["version", "description", "authors", "urls", "keywords"]
 
+[project.entry-points."jupyterlab.locale"]
+rdm_binderhub_jlabextension = "rdm_binderhub_jlabextension"
+
 [tool.hatch.version]
 source = "nodejs"
 
@@ -40,6 +43,15 @@ exclude = [".github", "binder"]
 "rdm_binderhub_jlabextension/labextension" = "share/jupyter/labextensions/rdm-binderhub-jlabextension"
 "install.json" = "share/jupyter/labextensions/rdm-binderhub-jlabextension/install.json"
 "jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
+
+[tool.hatch.build.targets.wheel]
+artifacts = [
+    "rdm_binderhub_jlabextension/**/*.json",
+    "rdm_binderhub_jlabextension/**/*.mo",
+]
+exclude = [
+    "rdm_binderhub_jlabextension/**/*.po",
+]
 
 [tool.hatch.build.hooks.version]
 path = "rdm_binderhub_jlabextension/_version.py"
@@ -73,6 +85,9 @@ before-build-npm = [
     "jlpm build:prod"
 ]
 before-build-python = ["jlpm clean:all"]
+
+[tool.hatch.build.hooks.jupyter-translate]
+dependencies = ["jupyterlab-translate>=1.2.0"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]

@@ -5,3 +5,7 @@
 - TEST
 
 <!-- <END NEW CHANGELOG ENTRY> -->
+
+# OLD logs
+
+- TEST

@@ -19,7 +19,8 @@
   "files": [
     "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
     "style/**/*.{css,js,eot,gif,html,jpg,json,png,svg,woff2,ttf}",
-    "style/index.js"
+    "style/index.js",
+    "schema/*.json"
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -28,6 +29,9 @@
     "type": "git",
     "url": "https://github.com/RCOSDP/CS-jupyterlab-grdm.git"
   },
+  "workspaces": [
+    "ui-tests"
+  ],
   "scripts": {
     "build": "jlpm build:lib && jlpm build:labextension:dev",
     "build:labextension": "jupyter labextension build .",
@@ -61,7 +65,8 @@
     "@jupyterlab/filebrowser": "^4.0.6",
     "@jupyterlab/services": "^7.0.6",
     "@jupyterlab/translation": "^4.0.6",
-    "@jupyterlab/ui-components": "^4.0.6"
+    "@jupyterlab/ui-components": "^4.0.6",
+    "html-react-parser": "^4.2.2"
   },
   "devDependencies": {
     "@jupyterlab/builder": "^4.0.0",
@@ -109,7 +114,8 @@
       }
     },
     "extension": true,
-    "outputDir": "rdm_binderhub_jlabextension/labextension"
+    "outputDir": "rdm_binderhub_jlabextension/labextension",
+    "schemaDir": "schema"
   },
   "jupyter-releaser": {
     "hooks": {
@@ -177,7 +183,8 @@
     "node_modules",
     "dist",
     "coverage",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "ui-tests"
   ],
   "prettier": {
     "singleQuote": true,

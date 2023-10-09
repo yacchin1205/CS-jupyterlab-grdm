@@ -51,6 +51,24 @@ _("jupyter", "server", "extension", "list")
 # initially list installed extensions to determine if there are any surprises
 _("jupyter", "labextension", "list")
 
+# install nbclassic extension
+_(
+    "jupyter",
+    "nbclassic-extension",
+    "install",
+    "--py",
+    "--sys-prefix",
+    "rdm_binderhub_jlabextension",
+)
+_(
+    "jupyter",
+    "nbclassic-extension",
+    "enable",
+    "--py",
+    "--sys-prefix",
+    "rdm_binderhub_jlabextension",
+)
+
 
 print("JupyterLab with rdm_binderhub_jlabextension is ready to run with:\n")
 print("\tjupyter lab\n")

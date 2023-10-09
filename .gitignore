@@ -42,6 +42,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+**/LC_MESSAGES/*.json
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -124,3 +125,4 @@ dmypy.json
 rdm_binderhub_jlabextension/nbextension/*.svg
 
 _temp_extension
+ui-tests/test-results/

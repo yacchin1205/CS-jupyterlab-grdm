@@ -1,3 +1,5 @@
+from tornado.ioloop import IOLoop
+
 try:
     from ._version import __version__
 except ImportError:
@@ -8,6 +10,20 @@ except ImportError:
     warnings.warn("Importing 'rdm_binderhub_jlabextension' outside a proper installation.")
     __version__ = "dev"
 from .handlers import setup_handlers
+from .config import SyncToRDM, save_env_to_home
+from . import server
+
+
+# nbextension
+def _jupyter_nbextension_paths():
+    return [dict(section="tree",
+                 src="nbextension",
+                 dest="rdm_binderhub_jlabextension",
+                 require="rdm_binderhub_jlabextension/main"),
+            dict(section="notebook",
+                 src="nbextension",
+                 dest="rdm_binderhub_jlabextension",
+                 require="rdm_binderhub_jlabextension/main")]
 
 
 def _jupyter_labextension_paths():
@@ -31,6 +47,8 @@ def _load_jupyter_server_extension(server_app):
     server_app: jupyterlab.labapp.LabApp
         JupyterLab application instance
     """
-    setup_handlers(server_app.web_app)
+    setup_handlers(SyncToRDM(parent=server_app), server_app.web_app)
+    IOLoop.current().add_callback(server.task_worker.watch_queue)
+    save_env_to_home()
     name = "rdm_binderhub_jlabextension"
     server_app.log.info(f"Registered {name} server extension")
