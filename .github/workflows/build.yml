@@ -93,3 +93,9 @@ jobs:
         pip install jupyterlab
         jupyter labextension list 2>&1 | grep -ie "rdm-binderhub-jlabextension.*OK"
         python -m jupyterlab.browser_check --no-chrome-test
+        jlpm install
+        jlpm build:prod
+        cd ./ui-tests
+        jlpm install
+        jlpm playwright install
+        jlpm playwright test
