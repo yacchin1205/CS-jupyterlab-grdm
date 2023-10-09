@@ -19,16 +19,16 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.9'
         architecture: 'x64'
 
     - name: Setup pip cache
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: pip-3.8-${{ hashFiles('package.json') }}
+        key: pip-3.9-${{ hashFiles('package.json') }}
         restore-keys: |
-          pip-3.8-
+          pip-3.9-
           pip-
 
     - name: Get yarn cache directory path
@@ -54,7 +54,7 @@ jobs:
 
         jupyter server extension list 2>&1 | grep -ie "rdm_binderhub_jlabextension.*OK"
 
-        jupyter labextension list 2>&1 | grep -ie "rdm_binderhub_jlabextension.*OK"
+        jupyter labextension list 2>&1 | grep -ie "rdm-binderhub-jlabextension.*OK"
         python -m jupyterlab.browser_check
 
         pip install build
@@ -78,7 +78,7 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.9'
         architecture: 'x64'
     - uses: actions/download-artifact@v2
       with:
@@ -91,5 +91,5 @@ jobs:
         sudo rm -rf $(which node)
         pip install myextension.tar.gz
         pip install jupyterlab
-        jupyter labextension list 2>&1 | grep -ie "rdm_binderhub_jlabextension.*OK"
+        jupyter labextension list 2>&1 | grep -ie "rdm-binderhub-jlabextension.*OK"
         python -m jupyterlab.browser_check --no-chrome-test
