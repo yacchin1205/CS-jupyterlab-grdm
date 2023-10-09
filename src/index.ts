@@ -55,7 +55,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
     console.log(
       'JupyterLab extension rdm-binderhub-jlabextension is activated!'
     );
-    const trans = translator.load('jupyterlab');
+    const trans = translator.load('rdm_binderhub_jlabextension');
     const sync = createSyncButton(trans);
     /* "Sync to GRDM" button is placed to the left of the filter text box */
     insertItemBefore(
