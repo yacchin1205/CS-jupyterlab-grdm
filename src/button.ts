@@ -59,7 +59,7 @@ async function reloadButtonState(
   const title = trans.__('Sync to GakuNin RDM');
   if (!resp.syncing && resp.last_result && resp.last_result.exit_code !== 0) {
     console.error('Sync error', resp.last_result);
-    const message = 'Command failed';
+    const message = trans.__('Command failed');
     await showDialog({
       title,
       body: `${message} ${resp.last_result.stderr}`,
@@ -69,7 +69,7 @@ async function reloadButtonState(
     return resp;
   }
   if (!resp.syncing) {
-    const message = 'Finished';
+    const message = trans.__('Finished');
     await showDialog({
       title,
       body: message,
