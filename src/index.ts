@@ -7,7 +7,7 @@ import { Widget } from '@lumino/widgets';
 import { IDefaultFileBrowser } from '@jupyterlab/filebrowser';
 import { ITranslator } from '@jupyterlab/translation';
 
-import { createSyncButton } from './button';
+import { createSyncButton, addSyncMenu } from './button';
 
 
 function insertItemBefore(
@@ -60,11 +60,12 @@ const plugin: JupyterFrontEndPlugin<void> = {
     /* "Sync to GRDM" button is placed to the left of the filter text box */
     insertItemBefore(
       browser.toolbar,
-      'sync_to_grdm',
+      'rdm-binderhub-jlabextension:sync-to-grdm-button',
       sync,
       'jp-FileBrowser-filterBox',
       1000, /*timeout*/
     );
+    addSyncMenu(trans, app.commands);
   }
 };
 

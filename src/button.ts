@@ -2,6 +2,7 @@ import { LabIcon } from '@jupyterlab/ui-components';
 import { ToolbarButton } from '@jupyterlab/apputils';
 import { showDialog, Dialog } from '@jupyterlab/apputils';
 import { TranslationBundle } from '@jupyterlab/translation';
+import { CommandRegistry } from '@lumino/commands';
 
 import logo from './images/GRDM_logo_horizon.svg';
 
@@ -47,7 +48,7 @@ function formatWarnMessage(action: IFilesAction) {
   return message + ': ' + (action.args || []).join(', ');
 }
 
-async function reloadButtonState(button: ToolbarButton) {
+async function reloadButtonState(button: ToolbarButton | null) {
   const resp = await requestAPI<IFilesResponse>('files');
   if (!resp.syncing && resp.last_result && resp.last_result.exit_code !== 0) {
     console.error('Sync error', resp.last_result);
@@ -57,7 +58,7 @@ async function reloadButtonState(button: ToolbarButton) {
       body: `${message} ${resp.last_result.stderr}`,
       buttons: [Dialog.okButton()]
     });
-    button.removeClass('rdm-binderhub-disabled');
+    button?.removeClass('rdm-binderhub-disabled');
     return resp;
   }
   if (!resp.syncing) {
@@ -67,14 +68,14 @@ async function reloadButtonState(button: ToolbarButton) {
       body: message,
       buttons: [Dialog.okButton()]
     });
-    button.removeClass('rdm-binderhub-disabled');
+    button?.removeClass('rdm-binderhub-disabled');
     return resp;
   }
   setTimeout(() => reloadButtonState(button), 1000);
   return resp;
 }
 
-async function startSync(button: ToolbarButton) {
+async function startSync(button: ToolbarButton | null) {
   const resp = await requestAPI<IFilesResponse>('files?action=sync');
   const currentAction = resp.action;
   if (!resp.syncing && currentAction && currentAction.id !== 'started') {
@@ -86,10 +87,28 @@ async function startSync(button: ToolbarButton) {
     });
     return resp;
   }
-  button.addClass('rdm-binderhub-disabled');
+  button?.addClass('rdm-binderhub-disabled');
   console.log('Started');
   await reloadButtonState(button);
   return resp;
+}
+
+export function addSyncMenu(trans: TranslationBundle, commands: CommandRegistry) {
+  commands.addCommand('rdm-binderhub-jlabextension:sync-to-grdm-menu', {
+    execute: () => {
+      startSync(null).catch(reason => {
+        console.error(
+          `The rdm_binderhub_jlabextension server extension failed.\n${reason}`
+        );
+      });
+    },
+    //iconClass: 'jp-MaterialIcon jp-LinkIcon',
+    label: 'Sync to GRDM',
+    icon: new LabIcon({
+      name: 'Sync to GRDM',
+      svgstr: logo
+    }),
+  });
 }
 
 export function createSyncButton(trans: TranslationBundle): ToolbarButton {
@@ -109,7 +128,7 @@ export function createSyncButton(trans: TranslationBundle): ToolbarButton {
     icon: new LabIcon({
       name: 'Sync to GRDM',
       svgstr: logo
-    })
+    }),
   });
   return sync;
 }
