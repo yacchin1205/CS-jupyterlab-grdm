@@ -67,11 +67,11 @@ skip-if-exists = ["rdm_binderhub_jlabextension/labextension/static/style.js"]
 
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
-npm = ["jlpm"]
+npm = ["./scripts/jlpm-with-resources.sh"]
 
 [tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
 build_cmd = "install:extension"
-npm = ["jlpm"]
+npm = ["./scripts/jlpm-with-resources.sh"]
 source_dir = "src"
 build_dir = "rdm_binderhub_jlabextension/labextension"
 
@@ -85,9 +85,6 @@ before-build-npm = [
     "jlpm build:prod"
 ]
 before-build-python = ["jlpm clean:all"]
-
-[tool.hatch.build.hooks.jupyter-translate]
-dependencies = ["jupyterlab-translate>=1.2.0"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
